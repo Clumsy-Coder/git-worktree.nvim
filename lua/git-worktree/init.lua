@@ -316,6 +316,7 @@ local function create_worktree(path, branch, upstream, found_branch)
         end
     })
 
+    branch = branch:gsub("origin/", "")
     local set_branch_cmd = 'git'
     local set_branch_args= {'branch', string.format('--set-upstream-to=%s/%s', upstream, branch)}
     local set_branch = Job:new({
