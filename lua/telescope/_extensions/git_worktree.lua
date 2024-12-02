@@ -203,9 +203,14 @@ local telescope_git_worktree = function(opts)
     }
 
     local make_display = function(entry)
+        -- telescope 0.1.5 causes the break when listing available git worktrees
+        --
+        -- applying changes from
+        -- https://github.com/ThePrimeagen/git-worktree.nvim/issues/122
+        local path, _ = utils.transform_path(opts, entry.path)
         return displayer {
             { entry.branch, "TelescopeResultsIdentifier" },
-            { utils.transform_path(opts, entry.path) },
+            { path },
             { entry.sha },
         }
     end
